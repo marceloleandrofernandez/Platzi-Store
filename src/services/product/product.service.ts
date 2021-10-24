@@ -25,6 +25,7 @@ export class ProductService {
     return product;
   }
   create(payload: CreateProductDto) {
+    console.log(payload);
     this.counterId++;
     const newProduct = {
       id: this.counterId,
@@ -35,12 +36,9 @@ export class ProductService {
   }
   update(id: number, payload: UpdateProductDto) {
     const product = this.findOne(id);
-    if (product) {
-      const index = this.products.findIndex((item) => item.id === id);
-      this.products[index] = { ...product, ...payload };
-      return this.products[index];
-    }
-    return null;
+    const index = this.products.findIndex((item) => item.id == id);
+    this.products[index] = { ...product, ...payload };
+    return this.products[index];
   }
   remove(id: number) {
     const index = this.products.findIndex((item) => item.id === id);
